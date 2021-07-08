@@ -1,7 +1,7 @@
 # basic-react-project
 ### Proyecto de react básico sin el comando create-react-app.
 
-# CREAR y CLONAR REPOSITORIO EN Github o Bitbucket
+CREAR y CLONAR REPOSITORIO EN Github o Bitbucket
 
 ## 2. INICIALIZAMOS EL PROYECTO
   npm init -y
