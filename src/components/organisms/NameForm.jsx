@@ -20,7 +20,7 @@ const NameForm = () => {
           setName(e.target.value);
         }}
       />
-      <button type="submit">Agregar nombre</button>
+      <button type="submit">Agregar amigo</button>
     </form>
   );
 };

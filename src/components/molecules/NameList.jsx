@@ -6,8 +6,8 @@ const NameList = observer(() => {
   const store = React.useContext(NameContext);
 
   return (<ul>
-    {store.names.map(name => (
-      <li key={name}>{name}</li>
+    {store.names.map((name, id) => (
+      <li key={id}>{name}</li>
     ))}
   </ul>)
 });
