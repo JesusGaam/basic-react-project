@@ -2,4 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Component from "./components/pages/Names";
 
-ReactDOM.render(<Component />, document.getElementById("app"));
+
+export default {
+  init: function (params) {
+    ReactDOM.render(<Component />,document.getElementById("app"));
+  }
+}

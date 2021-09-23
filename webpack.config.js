@@ -2,11 +2,20 @@ const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: {
+    app: ['./src/index.js']
+  },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    filename: "projectName.bundle.js",
+    library: 'projectName',
   },
+  devServer: {
+    port: 3001,
+    open: false,
+    injectClient: false, //Evita que dev-server anteponta su entrada. Usada para leer las funciones de output.library
+  },
+  devtool: false,
   resolve: {
     extensions: [".js", ".jsx"],
   },
