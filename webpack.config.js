@@ -1,21 +1,40 @@
 const path = require("path");
+const dotenv = require('dotenv');
+const webpack = require("webpack");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
-module.exports = {
+const getEnvKeys = env => {
+
+  const fileEnv = dotenv.config({ path: `./.env.${getEnvType(env)}` }).parsed;
+  const envKeys = Object.keys(fileEnv).reduce((prev, next) => {
+    prev[`process.env.${next}`] = JSON.stringify(fileEnv[next]);
+    return prev;
+  }, {});
+
+  envKeys['process.env.NODE_ENV'] = JSON.stringify(getEnvType(env));
+  console.log("VARIABLES DE ENTORNO", envKeys);
+  
+  return envKeys
+}
+
+const getEnvType = env => {
+  //{ WEBPACK_BUILD: true, WEBPACK_SERVE: true}
+  return env.WEBPACK_BUILD ? 'production' : 'development'
+}
+
+module.exports = env => ({
   entry: {
     app: ['./src/index.js']
   },
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "projectName.bundle.js",
-    library: 'projectName',
   },
   devServer: {
-    port: 3001,
+    port: 3000,
     open: false,
-    injectClient: false, //Evita que dev-server anteponta su entrada. Usada para leer las funciones de output.library
   },
-  devtool: false,
+  devtool: 'source-map',
   resolve: {
     extensions: [".js", ".jsx"],
   },
@@ -40,8 +59,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./public/index.html",
-      filename: "./index.html",
+      template: "./public/index.ejs",
     }),
+    new webpack.DefinePlugin(getEnvKeys(env))
   ],
-};
+});

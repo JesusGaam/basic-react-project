@@ -1,10 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Component from "./components/pages/Names";
+import Theme from "./components/themes/Theme";
+import Component from "./components/pages/DesignSystem";
+import GlobalStyle from './components/themes/globalStyles';
 
-
-export default {
-  init: function (params) {
-    ReactDOM.render(<Component />,document.getElementById("app"));
-  }
-}
+ReactDOM.render(
+  <Theme>
+    <Component />
+    <GlobalStyle />
+  </Theme>,
+  document.getElementById("app"));
