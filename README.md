@@ -57,12 +57,11 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "projectName.bundle.js",
-    library: 'projectName',
   },
   devServer: {
     port: 3001,
     open: false,
-    injectClient: false, //Evita que dev-server anteponta su entrada. Usada para leer las funciones de output.library
+    injectClient: false, //(OPCIONAL) Evita que dev-server anteponta su entrada. Usada para leer las funciones de output.library
   },
   devtool: false,
   resolve: {
