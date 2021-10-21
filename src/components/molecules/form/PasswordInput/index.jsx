@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import styled, { } from 'styled-components';
-import { getRandomNumber } from '../../../utils/Utilities'
-import Label from "./Label";
-import HelperText from "./HelperText";
+import { getRandomNumber, isEmail } from '../../../../utils/Utilities'
+import Label from "../Label";
+import HelperText from "../HelperText";
+import './style.scss'
 
-const TextInput = ({ options }) => {
+const PasswordInput = ({ options }) => {
   const {
     id = getRandomNumber(10000, 1000000),
     error = false,
@@ -25,8 +25,8 @@ const TextInput = ({ options }) => {
   }, [])
 
   return (
-    <Wrapper
-      className={`form-element ${disabled ? 'disabled' : ''}`}
+    <div
+      className={`form-element password ${disabled ? 'disabled' : ''}`}
     >
       <Label
         options={{
@@ -38,9 +38,10 @@ const TextInput = ({ options }) => {
       <div className="input">
         <input
           id={id}
-          type="text"
+          type="password"
           defaultValue={defaultValue}
           placeholder={placeholder}
+          onInput={(e) => emit(e.target.value)}
           onInput={(e) => emit(e.target.value, validationEvent(e.target.value, required))}
           autoComplete="off"
         />
@@ -51,23 +52,24 @@ const TextInput = ({ options }) => {
           helperText: helper || defaultHelper
         }}
       />
-    </Wrapper>
+    </div>
   );
 }
 
 const validationEvent = (value, required) => {
-  var error = required && value.length == 0;
+  let error = true;
+  let message = "";
 
-  return {
-    error,
-    message: error ? "Este campo es obligatorio" : ""
-  }
+
+  if (required && value.length == 0) {
+    message = "Este campo es obligatorio";
+  } else
+    if (!isEmail(value)) {
+      message = "El correo electrónico es incorrecto";
+    } else {
+      error = false;
+    }
+  return { error, message }
 }
 
-const Wrapper = styled.div`
-  &.disabled{
-    
-  }
-`;
-
-export default TextInput;
+export default PasswordInput;

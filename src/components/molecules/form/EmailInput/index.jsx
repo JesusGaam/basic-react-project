@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-import styled, { } from 'styled-components';
-import { getRandomNumber, isEmail } from '../../../utils/Utilities'
-import Label from "./Label";
-import HelperText from "./HelperText";
+import { getRandomNumber, isEmail } from '../../../../utils/Utilities'
+import Label from "../Label"
+import HelperText from "../HelperText";
 
 const EmailInput = ({ options }) => {
   const {
@@ -25,8 +24,8 @@ const EmailInput = ({ options }) => {
   }, [])
 
   return (
-    <Wrapper
-      className={`form-element ${disabled ? 'disabled' : ''}`}
+    <div
+      className={`form-element email ${disabled ? 'disabled' : ''}`}
     >
       <Label
         options={{
@@ -52,7 +51,7 @@ const EmailInput = ({ options }) => {
           helperText: helper || defaultHelper
         }}
       />
-    </Wrapper>
+    </div>
   );
 }
 
@@ -71,11 +70,5 @@ const validationEvent = (value, required) => {
     }
   return { error, message }
 }
-
-const Wrapper = styled.div`
-  &.disabled{
-    
-  }
-`;
 
 export default EmailInput;

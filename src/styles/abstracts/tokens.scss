@@ -1,0 +1,87 @@
+$fontFamilyNamePrimary: "Open Sans", sans-serif;
+$fontFamilyNameSecundary: "Roboto Mono";
+
+$sizeH1: 32px;
+$sizeH2: 28px;
+$sizeH3: 24px;
+$sizeText: 18px;
+
+$borderRadiusBox: 20px;
+
+$horizontalPaddingInput: 20px;
+$borderRadiusInput: 50px;
+
+$headerHeight: 58px;
+
+$zIndexDeepDive: -99999;
+$zIndexDefault: 1;
+$zIndexSticky: 100;
+$xIndexModal: 9000;
+
+$breakPointSM: 420px;
+$breakPointMD: 768px;
+$breakPointLG: 992px;
+$breakPointXL: 1200px;
+
+
+:root {
+  $colorPrimary: #2196f3;
+  $colorSecundary: #373a3c;
+
+  --color-primary: #{$colorPrimary};
+  --color-primary-lighten: #{lighten($colorPrimary, 10%)};
+  --color-primary-darken: #{darken($colorPrimary, 10%)};
+
+  --color-secundary: #{$colorSecundary};
+  --color-secundary-lighten: #{lighten($colorSecundary, 10%)};
+  --color-secundary-darken: #{darken($colorSecundary, 10%)};
+
+  --color-success: #28972d;
+  --color-info: #008aff;
+  --color-warning: #ff9800;
+  --color-danger: #e51c23;
+  --color-disabled: #a1a1a1;
+
+  --color-background: #f2f2f2;
+  --color-text: #090909;
+  --color-button-primary: #ffffff;
+  --color-button-secundary: #ffffff;
+  --color-link: #090909;
+  --color-link-hover: #090909;
+  --color-link-active: #090909;
+  --color-link-visited: #090909;
+
+  --color-background-input: #f9f9f9;
+  --color-border-input: #c9c9c9;
+}
+
+.dark {
+  $colorPrimary: #2a9fd6;
+  $colorSecundary: #555555;
+
+  --color-primary: #{$colorPrimary};
+  --color-primary-lighten: #{lighten($colorPrimary, 10%)};
+  --color-primary-darken: #{darken($colorPrimary, 10%)};
+
+  --color-secundary: #{$colorSecundary};
+  --color-secundary-lighten: #{lighten($colorSecundary, 10%)};
+  --color-secundary-darken: #{darken($colorSecundary, 10%)};
+
+  --color-success: #00df88;
+  --color-info: #5fb4fb;
+  --color-warning: #ddc969;
+  --color-danger: #b9000d;
+  --color-disabled: #6e6e6e;
+
+  --color-background: #000000;
+  --color-text: #ffffff;
+  --color-button-primary: #ffffff;
+  --color-button-secundary: #ffffff;
+  --color-link: #f98015;
+  --color-link-hover: lightblue;
+  --color-link-active: #f98015;
+  --color-link-visited: blue;
+
+  --color-background-input: #1B1B1B;
+  --color-border-input: #323138;
+}

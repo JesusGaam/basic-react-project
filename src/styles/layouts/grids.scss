@@ -1,0 +1,74 @@
+.row{
+    display: block;
+
+    .col-1{
+        width: 8.33%;
+    }
+    .col-2 {
+        width: 16.66%;
+    }
+    .col-3 {
+        width: 24.99%;
+    }
+    .col-4 {
+        width: 33.32%;
+    }
+    .col-5{
+        width: 41.65%;
+    }
+    .col-6 {
+        width: 49.98%;
+    }
+    .col-7 {
+        width: 58.31%;
+    }
+    .col-8 {
+        width: 66.64%;
+    }
+    .col-9{
+        width: 74.97%;
+    }
+    .col-10 {
+        width: 83.3%;
+    }
+    .col-11 {
+        width: 91.63%;
+    }
+    .col-12 {
+        width: 100%;
+    }
+
+    //.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12
+    [class*="col-"] {
+        vertical-align: top;
+        box-sizing: border-box;
+
+        @include media-md-greater{
+            display: inline-block;
+        }
+
+        @include media-md{
+            &.all-screens,
+            &.until-medium{
+                display: inline-block;
+                //Se queda el width especifico del numero de columnas
+            }
+
+            &:not(.all-screens):not(.until-medium){
+                display: block;
+                width: initial;
+            }
+        }
+
+        @include media-sm{
+            &.all-screens{
+                display: inline-block;
+                //Se queda el width especifico del numero de columnas
+            }
+            &:not(.all-screens){
+                display: block;
+                width: initial;
+            }
+        }
+    }
+}

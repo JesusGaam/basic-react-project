@@ -1,0 +1,11 @@
+@import "../../../../styles/abstracts/all.scss";
+
+.helper-text {
+  padding-left: $horizontalPaddingInput;
+  margin-top: 4px;
+  font-size: $sizeText - 4px;
+
+  &.error {
+    color: var(--color-danger);
+  }
+}

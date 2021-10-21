@@ -2,6 +2,8 @@ const path = require("path");
 const dotenv = require('dotenv');
 const webpack = require("webpack");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 
 const getEnvKeys = env => {
 
@@ -13,7 +15,7 @@ const getEnvKeys = env => {
 
   envKeys['process.env.NODE_ENV'] = JSON.stringify(getEnvType(env));
   console.log("VARIABLES DE ENTORNO", envKeys);
-  
+
   return envKeys
 }
 
@@ -28,7 +30,7 @@ module.exports = env => ({
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "projectName.bundle.js",
+    filename: "[name].bundle.js",
   },
   devServer: {
     port: 3000,
@@ -55,12 +57,23 @@ module.exports = env => ({
           },
         ],
       },
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "sass-loader"
+        ],
+      },
     ],
   },
   plugins: [
     new HtmlWebPackPlugin({
       template: "./public/index.ejs",
     }),
-    new webpack.DefinePlugin(getEnvKeys(env))
+    new webpack.DefinePlugin(getEnvKeys(env)),
+    new MiniCssExtractPlugin({
+      filename: '[name].css'
+    }),
   ],
 });

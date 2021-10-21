@@ -1,0 +1,182 @@
+@mixin widthFill() {
+  width: 100%;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  width: stretch;
+}
+@mixin user-select($options: none) {
+  -webkit-touch-callout: $options; /* iOS Safari */
+    -webkit-user-select: $options; /* Safari */
+     -khtml-user-select: $options; /* Konqueror HTML */
+       -moz-user-select: $options; /* Old versions of Firefox */
+        -ms-user-select: $options; /* Internet Explorer/Edge */
+            user-select: $options; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+@mixin rotate($degrees) {
+  -moz-transform: rotate($degrees);
+  -webkit-transform: rotate($degrees);
+  -o-transform: rotate($degrees);
+  -ms-transform: rotate($degrees);
+  transform: rotate($degrees);
+}
+
+@mixin animate($options) {
+  -webkit-animation: $options;
+  -moz-animation: $options;
+  -o-animation: $options;
+  -ms-animation: $options;
+  animation: $options;
+}
+
+@mixin transition($options) {
+  -webkit-transition: $options;
+  -moz-transition: $options;
+  -o-transition: $options;
+  transition: $options;
+}
+
+@mixin box-sizing($options) {
+  -webkit-box-sizing: $options;
+  -moz-box-sizing: $options;
+  box-sizing: $options;
+}
+
+@mixin appearance($options) {
+  -webkit-appearance: $options;
+  -moz-appearance: $options;
+  -ms-appearance: $options;
+  appearance: $options;
+}
+
+@mixin transform($options) {
+  -moz-transform: $options;
+  -webkit-transform: $options;
+  -o-transform: $options;
+  -ms-transform: $options;
+  transform: $options;
+}
+@mixin border-radius($options) {
+  -webkit-border-radius: $options;
+  -moz-border-radius: $options;
+  border-radius: $options;
+}
+@mixin border-radius-top-right($options) {
+  -webkit-border-top-right-radius: $options;
+  -moz-border-radius-topright: $options;
+  border-top-right-radius: $options;
+}
+@mixin border-radius-top-left($options) {
+  -webkit-border-top-left-radius: $options;
+  -moz-border-radius-topleft: $options;
+  border-top-left-radius: $options;
+}
+@mixin border-radius-bottom-right($options) {
+  -webkit-border-bottom-right-radius: $options;
+  -moz-border-radius-bottomright: $options;
+  border-bottom-right-radius: $options;
+}
+@mixin border-radius-bottom-left($options) {
+  -webkit-border-bottom-left-radius: $options;
+  -moz-border-radius-bottomleft: $options;
+  border-bottom-left-radius: $options;
+}
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@mixin box-shadow($options) {
+  -webkit-box-shadow: $options;
+  -moz-box-shadow: $options;
+  box-shadow: $options;
+}
+
+@mixin background-size($options: cover) {
+  -webkit-background-size: $options;
+  -moz-background-size: $options;
+  -o-background-size: $options;
+  background-size: $options;
+}
+
+@mixin filter($options) {
+  -webkit-filter: $options;
+  -moz-filter: $options;
+  -o-filter: $options;
+  -ms-filter: $options;
+  filter: $options;
+}
+
+
+
+
+@mixin media-sm{
+  @media screen and (max-width: $breakPointSM){
+    @content;
+  }
+}
+@mixin media-sm-greater {
+  @media screen and (min-width: $breakPointSM + 1px){
+    @content;
+  }
+}
+
+
+@mixin media-md {
+  @media screen and (min-width: $breakPointSM + 1px) and (max-width: $breakPointMD){
+    @content;
+  }
+}
+@mixin media-md-less {
+  @media screen and (max-width: $breakPointMD){
+    @content;
+  }
+}
+@mixin media-md-greater {
+  @media screen and (min-width: $breakPointMD + 1px){
+    @content;
+  }
+}
+
+
+@mixin media-lg {
+  @media screen and (min-width: $breakPointMD + 1px) and (max-width: $breakPointLG){
+    @content;
+  }
+}
+@mixin media-lg-less {
+  @media screen and (max-width: $breakPointLG){
+    @content;
+  }
+}
+@mixin media-lg-greater {
+  @media screen and (min-width: $breakPointLG + 1px){
+    @content;
+  }
+}
+
+
+@mixin media-xl {
+  @media screen and (min-width: $breakPointLG + 1px) and (max-width: $breakPointXL){
+    @content;
+  }
+}
+@mixin media-xl-less {
+  @media screen and (max-width: $breakPointXL){
+    @content;
+  }
+}
+@mixin media-xl-greater {
+  @media screen and (min-width: $breakPointXL + 1px){
+    @content;
+  }
+}

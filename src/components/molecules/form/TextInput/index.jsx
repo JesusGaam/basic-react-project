@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import styled, { } from 'styled-components';
-import { getRandomNumber, isEmail } from '../../../utils/Utilities'
-import Label from "./Label";
-import HelperText from "./HelperText";
+import { getRandomNumber } from '../../../../utils/Utilities'
+import Label from "../Label";
+import HelperText from "../HelperText";
+import './style.scss'
 
-const PasswordInput = ({ options }) => {
+const TextInput = ({ options }) => {
   const {
     id = getRandomNumber(10000, 1000000),
     error = false,
@@ -25,8 +25,8 @@ const PasswordInput = ({ options }) => {
   }, [])
 
   return (
-    <Wrapper
-      className={`form-element ${disabled ? 'disabled' : ''}`}
+    <div
+      className={`form-element text ${disabled ? 'disabled' : ''}`}
     >
       <Label
         options={{
@@ -38,10 +38,9 @@ const PasswordInput = ({ options }) => {
       <div className="input">
         <input
           id={id}
-          type="password"
+          type="text"
           defaultValue={defaultValue}
           placeholder={placeholder}
-          onInput={(e) => emit(e.target.value)}
           onInput={(e) => emit(e.target.value, validationEvent(e.target.value, required))}
           autoComplete="off"
         />
@@ -52,31 +51,17 @@ const PasswordInput = ({ options }) => {
           helperText: helper || defaultHelper
         }}
       />
-    </Wrapper>
+    </div>
   );
 }
 
 const validationEvent = (value, required) => {
-  let error = true;
-  let message = "";
+  var error = required && value.length == 0;
 
-
-  if (required && value.length == 0) {
-    message = "Este campo es obligatorio";
-  } else
-    if (!isEmail(value)) {
-      message = "El correo electrónico es incorrecto";
-    } else {
-      error = false;
-    }
-  return { error, message }
+  return {
+    error,
+    message: error ? "Este campo es obligatorio" : ""
+  }
 }
 
-const Wrapper = styled.div`
-  &.disabled{ 
-  }
-  input[type=password]{
-  }
-`;
-
-export default PasswordInput;
+export default TextInput;
