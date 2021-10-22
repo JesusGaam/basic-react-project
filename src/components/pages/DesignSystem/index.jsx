@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './style.scss'
 
-import ButtonInput from "../../molecules/form/ButtonInput";
+import ButtonInput from "@/components/molecules/form/ButtonInput";
 import TextInput from "../../molecules/form/TextInput";
 import EmailInput from "../../molecules/form/EmailInput";
 import PasswordInput from "../../molecules/form/PasswordInput";

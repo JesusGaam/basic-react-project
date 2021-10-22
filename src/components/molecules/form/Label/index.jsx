@@ -1,9 +1,10 @@
 import React from "react";
+import { getRandomNumber } from '@/utils/Utilities'
 import './style.scss'
 
 const Label = ({ options }) => {
   const {
-    id,
+    id = getRandomNumber(10000, 1000000),
     required = false,
     label = '',
   } = options;

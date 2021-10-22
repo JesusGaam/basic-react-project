@@ -6,7 +6,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 
 const getEnvKeys = env => {
-
   const fileEnv = dotenv.config({ path: `./.env.${getEnvType(env)}` }).parsed;
   const envKeys = Object.keys(fileEnv).reduce((prev, next) => {
     prev[`process.env.${next}`] = JSON.stringify(fileEnv[next]);
@@ -39,6 +38,9 @@ module.exports = env => ({
   devtool: 'source-map',
   resolve: {
     extensions: [".js", ".jsx"],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    }
   },
   module: {
     rules: [
@@ -64,6 +66,10 @@ module.exports = env => ({
           "css-loader",
           "sass-loader"
         ],
+      },
+      {
+        test: /\.svg$/,
+        use: ["svg-url-loader"],
       },
     ],
   },
