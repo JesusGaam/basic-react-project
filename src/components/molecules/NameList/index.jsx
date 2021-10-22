@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import NameContext from '../../contexts/NameContext'
+import NameContext from '../../../contexts/NameContext'
 
 const NameList = observer(() => {
   const store = React.useContext(NameContext);

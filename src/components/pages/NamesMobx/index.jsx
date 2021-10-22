@@ -1,9 +1,9 @@
 import React from 'react';
-import NameStore from '../../stores/NameStore';
+import NameStore from '../../../stores/NameStore';
 
-import NameCounter from '../molecules/NameCounter';
-import NameList from '../molecules/NameList';
-import NameForm from '../organisms/NameForm';
+import NameCounter from '../../molecules/NameCounter';
+import NameList from '../../molecules/NameList';
+import NameForm from '../../organisms/NameForm';
 
 const App = () => {
   return (
