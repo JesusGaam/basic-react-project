@@ -6,21 +6,22 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 
 const getEnvKeys = env => {
+  const mode = env.WEBPACK_BUILD ? 'production' : 'development'; //{ WEBPACK_BUILD: true, WEBPACK_SERVE: true}
   const fileEnv = dotenv.config({ path: `./.env.${getEnvType(env)}` }).parsed;
   const envKeys = Object.keys(fileEnv).reduce((prev, next) => {
     prev[`process.env.${next}`] = JSON.stringify(fileEnv[next]);
     return prev;
   }, {});
 
-  envKeys['process.env.NODE_ENV'] = JSON.stringify(getEnvType(env));
+  envKeys['process.env.MODE'] = JSON.stringify(getEnvType(env));
+  envKeys['process.env.NODE_ENV'] = JSON.stringify(mode);
   console.log("VARIABLES DE ENTORNO", envKeys);
 
   return envKeys
 }
 
 const getEnvType = env => {
-  //{ WEBPACK_BUILD: true, WEBPACK_SERVE: true}
-  return env.WEBPACK_BUILD ? 'production' : 'development'
+  return env.PROD? 'production' : env.DEV? 'development' : 'qa' 
 }
 
 module.exports = env => ({

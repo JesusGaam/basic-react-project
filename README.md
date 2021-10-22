@@ -161,6 +161,7 @@ npm install webpack-dev-server --save-dev
 ```
 npm i -D css-loader sass sass-loader mini-css-extract-plugin
 ```
+
 ### 8.2 Se agrega el loader en web ***webpack.config.js***
 Se importa el plugin, posteriormente se agregan las reglas del loader y se agrega el plugin para exportar el archivo de CSS
 ```
@@ -181,11 +182,13 @@ plugins = {
   }),
 }
 ```
+
 ## 9 Configuración de Loader para imagenes SVG
 ### 9.1 Se intalan las despendencias de NPM 
 ```
 npm i -D svg-url-loader
 ```
+
 ### 8.2 Se agrega el loader en web ***webpack.config.js*** dentro del array en ***module.rules***
 ```
 module.rules = [
@@ -224,12 +227,14 @@ resolve.alias = {
 ```
 npm i -D @testing-library/jest-dom @testing-library/react @testing-library/user-event react-scripts
 ```
+
 ### 11.2 Se agregan los comandos para ejecutar las pruebas 
 ```
 "scripts": {
   "test": "react-scripts test --watchAll"
 }
 ```
+
 ### 11.3 En dado caso de agregar alias en webpack es necesario especificarlos en el objeto ***jest***
 ```
 "jest": {
@@ -238,67 +243,84 @@ npm i -D @testing-library/jest-dom @testing-library/react @testing-library/user-
   }
 };
 ```
+
 ### 11.4 Se crea un archivo de variables de entorno generico ***.env*** en raiz del proyecto
 ```
 SKIP_PREFLIGHT_CHECK=true
 ```
+
 ### 11.5 Se crea el archivo de configuración para jest ***src/setupTests.js*** para importar jest-dom en todos los archivos de pruebas
 ```
 import '@testing-library/jest-dom';
 ```
-## 12 Configuración de Jest
+
+## 12 Configuración de VARIABLES DE ENTORNO
 ### 12.1 Se intalan las despendencias de NPM 
 ```
 npm i -D dotenv
 ```
+
 ### 12.2 Se importa ***dotenv*** y ***webpack*** para el uso del plugin
 ```
 const webpack = require("webpack");
 const dotenv = require('dotenv');
 ```
-### 12.2 Se agregan las siguientes funciones para obtener las variables de entorno
+### 12.3 Se agregan las siguientes funciones para obtener las variables de entorno
 ```
 const getEnvKeys = env => {
+  const mode = env.WEBPACK_BUILD ? 'production' : 'development';
   const fileEnv = dotenv.config({ path: `./.env.${getEnvType(env)}` }).parsed;
   const envKeys = Object.keys(fileEnv).reduce((prev, next) => {
     prev[`process.env.${next}`] = JSON.stringify(fileEnv[next]);
     return prev;
   }, {});
 
-  envKeys['process.env.NODE_ENV'] = JSON.stringify(getEnvType(env));
+  envKeys['process.env.MODE'] = JSON.stringify(getEnvType(env));
+  envKeys['process.env.NODE_ENV'] = JSON.stringify(mode);
   console.log("VARIABLES DE ENTORNO", envKeys);
 
   return envKeys
 }
 
 const getEnvType = env => {
-  //{ WEBPACK_BUILD: true, WEBPACK_SERVE: true}
-  return env.WEBPACK_BUILD ? 'production' : 'development'
+  return env.PROD? 'production' : env.DEV? 'development' : 'qa' 
 }
 ```
-### 12.3 Se importa el plugin dentro del objeto ***plugins***
+### 12.4 Se importa el plugin dentro del objeto ***plugins***
 ```
 plugins = [
   new webpack.DefinePlugin(getEnvKeys(env)),
 ]
 ```
-### 12.4 Se crean los archivos de variables de entorno en la raíz del proyecto
+### 12.5 Se crean los archivos de variables de entorno en la raíz del proyecto
 * .env.development
 * .env.production
+* .env.qa
 
-## 8 Instalación de Mobx
-### 8.1 Se intalan la despendencias de MOBX para React
+### 12.6 Se actualizan los comandos para ejecutar el proyecto
+```
+"scripts": {
+  "start": "webpack-cli serve --mode development --env DEV",
+  "build": "webpack --mode production --env QA",
+  "build:qa": "webpack --mode production --env QA",
+  "build:prod": "webpack --mode production --env PROD",
+}
+```
+
+
+## 13 Instalación de Mobx
+### 13.1 Se intalan la despendencias de MOBX para React
 ```
 npm i mobx mobx-react
 ```
 
-### 8.2 Se deshabilita el modo devtool
+### 13.2 Se deshabilita el modo devtool
 Agregar la propiedad devtool con valor 'source-map' en ***webpack.config.js*** para ocultar los errores .map en el browser
 ```
 devtool: 'source-map',
 ```
 
-## 8 Comandos para ejecutar la aplicación
+## 14 Comandos para ejecutar la aplicación
 * Develop 
   ```
   npm run build

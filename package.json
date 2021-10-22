@@ -4,8 +4,10 @@
   "description": "Proyecto de react básico sin el comando create-react-app.",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-cli serve --mode development",
-    "build": "webpack --mode production",
+    "start": "webpack-cli serve --mode development --env DEV",
+    "build": "webpack --mode production --env QA",
+    "build:qa": "webpack --mode production --env QA",
+    "build:prod": "webpack --mode production --env PROD",
     "test": "react-scripts test --watchAll"
   },
   "repository": {
