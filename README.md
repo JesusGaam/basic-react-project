@@ -119,14 +119,17 @@ options.plugins = [
     * molecules/
     * organisms/
     * pages/
+* Creamos la carpeta de ***assets*** dentro de **src/**
+* assets/
+  * img/
 
 ## 6 Creando nuestros archivos
-### 6.1 Creación del componente principal ***Home.jsx***
-Se crea el componente ***Home.jsx*** dentro del directorio *src/components/pages/*
+### 6.1 Creación del componente principal ***Index.jsx***
+Se crea el componente ***Index.jsx*** dentro del directorio *src/components/pages/*
 Insertamos el siguiente contenido:
 ```
 import React from "react";
-const Home = () => {
+const Index = () => {
   return (
     <>
       <h1> Hola Mundo! </h1>
@@ -134,7 +137,7 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Index;
 ```
 
 ### 6.2 Creación del archivo HTML principal ***index.ejs***
@@ -153,6 +156,16 @@ Hacemos la referencia por medio del id "app" para que busque y empujar nuestra a
     <div id="app"></div>
 </body>
 </html>
+```
+
+### 6.3 Creación del script principal en ***src/*** 
+Se crea el archivo index.js dentro de la carpeta *src/*
+```
+import React from "react";
+import ReactDOM from "react-dom";
+import Component from "./components/pages/Index";
+
+ReactDOM.render(<Component />, document.getElementById("app"));
 ```
 
 ## 7 Creando nuestro servidor local
@@ -197,6 +210,44 @@ plugins = {
 }
 ```
 
+### 8.3 Se crea el encarpetado para las hojas de estilo son SCSS
+* Crear la carpeta **src/styles/** 
+* Crear las siguentes carpetas dentro de  **src/styles/** con los respectivos archivos **scss**
+  * abstracts
+    * all.scss
+    * functions.scss
+    * mixins.scss
+    * tokens.scss
+  * base
+    * fonts.scss
+    * global.scss
+  * layouts
+    * grids.scss
+    * layers.scss
+  * main.scss
+
+### 8.3.1 El archivo ***main.scss*** contendrá las importaciones del resto de achivos en el encarpetado
+```
+@import 'abstracts/all.scss';
+
+@import 'base/fonts.scss';
+@import 'base/global.scss';
+
+@import 'layouts/grids.scss';
+@import 'layouts/layers.scss';
+```
+### 8.3.2 El archivo ***styles/abstracts/all.scss*** contendrá las importaciones de los archivos dentro de ***styles/abstracts/***
+```
+@import 'functions.scss';
+@import 'mixins.scss';
+@import 'tokens.scss';
+```
+### 8.4 Se importan los estilos en ***src/index.js***
+Con esto al compilar/correr el proyecto ya incluirá los estilos
+```
+import './styles/main.scss'
+```
+
 ## 9 Configuración de Loader para imagenes SVG
 ### 9.1 Se intalan las despendencias de NPM 
 ```
@@ -211,6 +262,15 @@ module.rules = [
     use: ["svg-url-loader"],
   }
 ];
+```
+### 8.3 Agregamos una imagen SVG para probar que el loader funcione correctamente y la importamos en **src/components/pages/Index.jsx**
+```
+import alien from '../../../src/assets/img/alien.svg'
+...
+...
+<img src={alien} alt="alien" width="300px"/>
+...
+
 ```
 
 ## 10 Configuración Alias en ***webpack.config.js***
@@ -306,12 +366,18 @@ plugins = [
   new webpack.DefinePlugin(getEnvKeys(env)),
 ]
 ```
-### 12.5 Se crean los archivos de variables de entorno en la raíz del proyecto
+### 12.5 Cambiar la forma en como se exporta el ***objeto json*** de ***webpack***, de objecto a funcion. 
+```
+module.exports = env => ({
+  ...
+));
+```
+### 12.6 Se crean los archivos de variables de entorno en la raíz del proyecto
 * .env.development
 * .env.production
 * .env.qa
 
-### 12.6 Se actualizan los comandos para ejecutar el proyecto
+### 12.7 Se actualizan los comandos para ejecutar el proyecto
 ```
 "scripts": {
   "start": "webpack-cli serve --mode development --env DEV",
@@ -337,9 +403,19 @@ devtool: 'source-map',
 ## 14 Comandos para ejecutar la aplicación
 * Develop 
   ```
+  npm start
+  ```
+* QA
+  ```
   npm run build
+  o
+  npm run build:qa
   ```
 * Production 
   ```
-  npm run start
+  npm run build:prod
+  ```
+* Test (Jest)
+  ```
+  npm test
   ```
