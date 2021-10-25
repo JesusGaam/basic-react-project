@@ -14,38 +14,15 @@ npm init -y
 npm install react react-dom --save
 ```
 
-## 3. Instalación y configuración de Babel.
-### 3.1 Instalación de Babel
-```
-npm install @babel/core @babel/preset-env @babel/preset-react babel-loader --save-dev
-```
 
-### 3.2 Instalarción de plugin complementario para traducir la calses o funciones
-```
-npm install babel-plugin-transform-class-properties --save-dev
-```
-
-### 3.3 Creación del archivo de configuración _.babelrc_ en raíz
-```
-{
-  "presets": [
-    "@babel/preset-env",
-    "@babel/preset-react"
-  ],
-  "plugins": [
-    "transform-class-properties"
-  ]
-}
-```
-
-## 4. CONFIGURACION DE WEBPACK
-### 4.1 Instalamos webpack
+## 3. CONFIGURACION DE WEBPACK
+### 3.1 Instalamos webpack
 ```
 npm install webpack webpack-cli html-webpack-plugin html-loader --save-dev
 ```
-### 4.2 Creamos el archivo de configuración de webpack en raiz titulado ***webpack.config.js***
+### 3.2 Creamos el archivo de configuración de webpack en raiz titulado ***webpack.config.js***
 
-### 4.3 Insertamos el siguiente contenido en el archivo ***webpack.config.js***
+### 3.3 Insertamos el siguiente contenido en el archivo ***webpack.config.js***
 ```
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
@@ -61,7 +38,6 @@ module.exports = {
   devServer: {
     port: 3000,
     open: false,
-    injectClient: false, //(OPCIONAL) Evita que dev-server anteponta su entrada. Usada para leer las funciones de output.library
   },
   devtool: false,
   resolve: {
@@ -71,10 +47,9 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-        },
+          exclude: /node_modules/,
+          loader: 'babel-loader',
+        options: {}
       },
       {
         test: /\.html$/,
@@ -92,6 +67,45 @@ module.exports = {
     }),
   ],
 };
+```
+
+
+## 4. Instalación y configuración de Babel.
+### 4.1 Instalación de Babel
+```
+npm install @babel/core @babel/preset-env @babel/preset-react babel-loader --save-dev
+```
+
+### 4.2 Instalación de plugin complementario para traducir la calses o funciones
+```
+npm install babel-plugin-transform-class-properties --save-dev
+```
+### 4.2.1 Agregar propiedades en el Loader de ***babel-loader***  ***Webpack***
+```
+options = {
+  presets: [
+    '@babel/preset-env',
+    '@babel/preset-react'
+  ],
+  plugins: [
+    'transform-class-properties',
+  ]
+}
+```
+### 4.3 Instalación de plugin complementario para compatibilidad con **Async y Await**
+```
+npm i -D @babel/runtime @babel/plugin-transform-runtime
+```
+### 4.3.1 Agregar propiedades en el Loader de ***babel-loader***  ***Webpack***
+```
+options.plugins = [
+  [
+    '@babel/plugin-transform-runtime',
+    {
+      regenerator: true
+    }
+  ]
+]
 ```
 
 ## 5. ESTRUCTURAR EL PROYECTO
