@@ -62,11 +62,11 @@ const validationEvent = (value, required) => {
   if (required && value.length == 0) {
     message = "Este campo es obligatorio";
   } else
-    if (!isEmail(value)) {
-      message = "El correo electrónico es incorrecto";
-    } else {
-      error = false;
-    }
+  if (!isEmail(value)) {
+    message = "El correo electrónico es incorrecto";
+  } else {
+    error = false;
+  }
   return { error, message }
 }
 
