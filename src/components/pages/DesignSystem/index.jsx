@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './style.scss'
 
-import ButtonInput from "@/components/molecules/form/ButtonInput";
+import ButtonInput from "../../molecules/form/ButtonInput";
 import TextInput from "../../molecules/form/TextInput";
 import EmailInput from "../../molecules/form/EmailInput";
 import PasswordInput from "../../molecules/form/PasswordInput";
@@ -38,6 +38,7 @@ const Home = () => {
   }
 
   const emitEmail = (value, statusError) => {
+    console.log(value);
     setEmailOptions({
       ...emailOptions,
       value,

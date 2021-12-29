@@ -40,7 +40,6 @@ const EmailInput = ({ options }) => {
           type="text"
           defaultValue={defaultValue}
           placeholder={placeholder}
-          onInput={(e) => emit(e.target.value)}
           onInput={(e) => emit(e.target.value, validationEvent(e.target.value, required))}
           autoComplete="off"
         />
