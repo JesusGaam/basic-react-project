@@ -1,0 +1,12 @@
+@import "../../../../styles/abstracts/all.scss";
+
+.form-element label {
+  display: block;
+  margin-bottom: 4px;
+  padding-left: $horizontalPaddingInput;
+  font-size: $sizeText - 2px;
+  .required {
+    color: var(--color-danger);
+    font-weight: bold;
+  }
+}

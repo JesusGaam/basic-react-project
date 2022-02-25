@@ -296,38 +296,6 @@ resolve.alias = {
 }
 ```
 
-## 11 Configuración de Jest
-### 11.1 Se intalan las despendencias de NPM 
-```
-npm i -D @testing-library/jest-dom @testing-library/react @testing-library/user-event react-scripts
-```
-
-### 11.2 Se agregan los comandos para ejecutar las pruebas 
-```
-"scripts": {
-  "test": "react-scripts test --watchAll"
-}
-```
-
-### 11.3 En dado caso de agregar alias en webpack es necesario especificarlos en el objeto ***jest***
-```
-"jest": {
-  "moduleNameMapper": {
-    "@/(.*)": "<rootDir>/src/$1"
-  }
-};
-```
-
-### 11.4 Se crea un archivo de variables de entorno generico ***.env*** en raiz del proyecto
-```
-SKIP_PREFLIGHT_CHECK=true
-```
-
-### 11.5 Se crea el archivo de configuración para jest ***src/setupTests.js*** para importar jest-dom en todos los archivos de pruebas
-```
-import '@testing-library/jest-dom';
-```
-
 ## 12 Configuración de VARIABLES DE ENTORNO
 ### 12.1 Se intalan las despendencias de NPM 
 ```
@@ -387,19 +355,6 @@ module.exports = env => ({
 }
 ```
 
-
-## 13 Instalación de Mobx
-### 13.1 Se intalan la despendencias de MOBX para React
-```
-npm i mobx mobx-react
-```
-
-### 13.2 Se deshabilita el modo devtool
-Agregar la propiedad devtool con valor 'source-map' en ***webpack.config.js*** para ocultar los errores .map en el browser
-```
-devtool: 'source-map',
-```
-
 ## 14 Comandos para ejecutar la aplicación
 * Develop 
   ```
@@ -414,8 +369,4 @@ devtool: 'source-map',
 * Production 
   ```
   npm run build:prod
-  ```
-* Test (Jest)
-  ```
-  npm test
   ```
