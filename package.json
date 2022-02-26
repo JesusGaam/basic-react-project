@@ -1,5 +1,5 @@
 {
-  "name": "cooltura-financiera",
+  "name": "basic-react-project",
   "version": "1.0.0",
   "description": "Proyecto de react básico sin el comando create-react-app.",
   "main": "index.js",
@@ -7,7 +7,8 @@
     "start": "webpack-cli serve --mode development --env DEV",
     "build": "webpack --mode production --env QA",
     "build:qa": "webpack --mode production --env QA",
-    "build:prod": "webpack --mode production --env PROD"
+    "build:prod": "webpack --mode production --env PROD",
+    "test": "react-scripts test --watchAll"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,14 @@
     "url": "https://github.com/JesusGaam/basic-react-project/issues"
   },
   "homepage": "https://github.com/JesusGaam/basic-react-project#readme",
+  "jest": {
+    "moduleNameMapper": {
+      "@/(.*)": "<rootDir>/src/$1"
+    }
+  },
   "dependencies": {
+    "mobx": "^6.3.3",
+    "mobx-react": "^7.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -28,6 +36,9 @@
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.14.5",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "css-loader": "^6.4.0",
@@ -35,11 +46,12 @@
     "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.2",
     "mini-css-extract-plugin": "^2.4.2",
+    "react-scripts": "^4.0.3",
     "sass": "^1.43.2",
     "sass-loader": "^12.2.0",
     "svg-url-loader": "^7.1.1",
     "webpack": "^5.43.0",
     "webpack-cli": "^4.7.2",
-    "webpack-dev-server": "^4.7.4"
+    "webpack-dev-server": "^3.11.2"
   }
 }
