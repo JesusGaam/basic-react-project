@@ -2,7 +2,6 @@ const path = require("path");
 const dotenv = require('dotenv');
 const webpack = require("webpack");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 
 const getEnvKeys = env => {
@@ -61,14 +60,6 @@ module.exports = env => ({
         ],
       },
       {
-        test: /\.s[ac]ss$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          "sass-loader"
-        ],
-      },
-      {
         test: /\.svg$/,
         use: ["svg-url-loader"],
       },
@@ -79,8 +70,5 @@ module.exports = env => ({
       template: "./public/index.ejs",
     }),
     new webpack.DefinePlugin(getEnvKeys(env)),
-    new MiniCssExtractPlugin({
-      filename: '[name].css'
-    }),
   ],
 });
