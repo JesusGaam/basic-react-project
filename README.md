@@ -183,95 +183,6 @@ npm install webpack-dev-server --save-dev
 }
 ```
 
-## 8 Configuración de SCSS
-### 8.1 Se intalan las despendencias de NPM 
-```
-npm i -D css-loader sass sass-loader mini-css-extract-plugin
-```
-
-### 8.2 Se agrega el loader en web ***webpack.config.js***
-Se importa el plugin, posteriormente se agregan las reglas del loader y se agrega el plugin para exportar el archivo de CSS
-```
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-module.rules = [
-  {
-    test: /\.s[ac]ss$/i,
-    use: [
-      MiniCssExtractPlugin.loader,
-      "css-loader",
-      "sass-loader"
-    ],
-  }
-];
-plugins = {
-  new MiniCssExtractPlugin({
-    filename: '[name].css'
-  }),
-}
-```
-
-### 8.3 Se crea el encarpetado para las hojas de estilo son SCSS
-* Crear la carpeta **src/styles/** 
-* Crear las siguentes carpetas dentro de  **src/styles/** con los respectivos archivos **scss**
-  * abstracts
-    * all.scss
-    * functions.scss
-    * mixins.scss
-    * tokens.scss
-  * base
-    * fonts.scss
-    * global.scss
-  * layouts
-    * grids.scss
-    * layers.scss
-  * main.scss
-
-### 8.3.1 El archivo ***main.scss*** contendrá las importaciones del resto de achivos en el encarpetado
-```
-@import 'abstracts/all.scss';
-
-@import 'base/fonts.scss';
-@import 'base/global.scss';
-
-@import 'layouts/grids.scss';
-@import 'layouts/layers.scss';
-```
-### 8.3.2 El archivo ***styles/abstracts/all.scss*** contendrá las importaciones de los archivos dentro de ***styles/abstracts/***
-```
-@import 'functions.scss';
-@import 'mixins.scss';
-@import 'tokens.scss';
-```
-### 8.4 Se importan los estilos en ***src/index.js***
-Con esto al compilar/correr el proyecto ya incluirá los estilos
-```
-import './styles/main.scss'
-```
-
-## 9 Configuración de Loader para imagenes SVG
-### 9.1 Se intalan las despendencias de NPM 
-```
-npm i -D svg-url-loader
-```
-
-### 8.2 Se agrega el loader en web ***webpack.config.js*** dentro del array en ***module.rules***
-```
-module.rules = [
-  {
-    test: /\.svg$/,
-    use: ["svg-url-loader"],
-  }
-];
-```
-### 8.3 Agregamos una imagen SVG para probar que el loader funcione correctamente y la importamos en **src/components/pages/Index.jsx**
-```
-import alien from '../../../src/assets/img/alien.svg'
-...
-...
-<img src={alien} alt="alien" width="300px"/>
-...
-
-```
 
 ## 10 Configuración Alias en ***webpack.config.js***
 ### 10.1 Se agrega el objeto ***alias*** dentro de  ***resolve*** y se agregan los alias que se requieran para el pryecto
@@ -385,13 +296,6 @@ module.exports = env => ({
   "build:qa": "webpack --mode production --env QA",
   "build:prod": "webpack --mode production --env PROD",
 }
-```
-
-
-## 13 Instalación de Mobx
-### 13.1 Se intalan la despendencias de MOBX para React
-```
-npm i mobx mobx-react
 ```
 
 ### 13.2 Se deshabilita el modo devtool

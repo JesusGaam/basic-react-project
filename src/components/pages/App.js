@@ -1,7 +1,13 @@
 import React from "react";
+import User from "./User";
 
 const App = () => {
-  return <div>Aplicación react</div>;
+  return (
+    <>
+      <User />
+      <div>Aplicación react</div>
+    </>
+  );
 };
 
 export default App;

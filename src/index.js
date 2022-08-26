@@ -1,5 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Component from "@/components/pages/App";
+import Theme from "./theme/Theme";
+import App from "@/components/pages/App";
+import GlobalStates from "@/contexts";
 
-ReactDOM.render(<Component />, document.getElementById("app"));
+ReactDOM.render(
+  <Theme>
+    <GlobalStates>
+      <App />
+    </GlobalStates>
+  </Theme>,
+  document.getElementById("app")
+);
