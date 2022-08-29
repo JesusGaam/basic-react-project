@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import useUser from "@/hooks/useUser";
+import { NavLink } from "react-router-dom";
+import Navigation from "../organisms/navigation/";
 
 const User = () => {
   const {
@@ -12,6 +14,8 @@ const User = () => {
 
   return (
     <>
+    <Navigation/>
+      <NavLink to="/app" style={{marginTop:"100px"}}>Go to App</NavLink>
       <form
         onSubmit={(e) => {
           e.preventDefault();

@@ -57,11 +57,11 @@ const theme = createTheme({
     },
     body1: {
       fontFamily,
-      fontSize: "1.8rem",
+      // fontSize: "1.8rem",
     },
     body2: {
       fontFamily,
-      fontSize: "1.6rem",
+      // fontSize: "1.6rem",
     },
   },
 });
