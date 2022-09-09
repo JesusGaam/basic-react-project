@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
       <Navigation />
-      <div style={{marginTop:"100px"}}>Aplicación react</div>
+      <div>Aplicación react</div>
       <NavLink to="/user">User</NavLink>
     </>
   );

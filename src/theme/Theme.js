@@ -1,8 +1,10 @@
 import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import GlobalStyles from "./GlobalStyles";
 
 const fontFamily = "Open Sans,sans-serif";
-const titleFontFamily = "Alegreya Sans SC,-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,sans-serif"
+const titleFontFamily =
+  "Alegreya Sans SC,-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,sans-serif";
 
 const shadows = [
   "none",
@@ -64,13 +66,21 @@ const theme = createTheme({
       // fontSize: "1.6rem",
     },
   },
+  custom: {
+    appBarHeight: "70px",
+  },
 });
 
 const Theme = ({ children }) => {
   for (const i in shadows) {
     theme.shadows[i] = shadows[i];
   }
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      {children}
+    </ThemeProvider>
+  );
 };
 
 export default Theme;
