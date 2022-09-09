@@ -1,6 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Component from "@/components/pages/DesignSystem/";
-import './styles/main.scss'
+import Theme from "./theme/Theme";
+import GlobalStates from "@/contexts";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Home, User } from "@/components/pages";
 
-ReactDOM.render(<Component />, document.getElementById("app"));
+ReactDOM.render(
+  <Theme>
+    <GlobalStates>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/user" element={<User />} />
+        </Routes>
+      </BrowserRouter>
+    </GlobalStates>
+  </Theme>,
+  document.getElementById("app")
+);

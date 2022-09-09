@@ -1,32 +1,30 @@
 const path = require("path");
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 const webpack = require("webpack");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-
-const getEnvKeys = env => {
-  const mode = env.WEBPACK_BUILD ? 'production' : 'development'; //{ WEBPACK_BUILD: true, WEBPACK_SERVE: true}
+const getEnvKeys = (env) => {
+  const mode = env.WEBPACK_BUILD ? "production" : "development"; //{ WEBPACK_BUILD: true, WEBPACK_SERVE: true}
   const fileEnv = dotenv.config({ path: `./.env.${getEnvType(env)}` }).parsed;
   const envKeys = Object.keys(fileEnv).reduce((prev, next) => {
     prev[`process.env.${next}`] = JSON.stringify(fileEnv[next]);
     return prev;
   }, {});
 
-  envKeys['process.env.MODE'] = JSON.stringify(getEnvType(env));
-  envKeys['process.env.NODE_ENV'] = JSON.stringify(mode);
+  envKeys["process.env.MODE"] = JSON.stringify(getEnvType(env));
+  envKeys["process.env.NODE_ENV"] = JSON.stringify(mode);
   console.log("VARIABLES DE ENTORNO", envKeys);
 
-  return envKeys
-}
+  return envKeys;
+};
 
-const getEnvType = env => {
-  return env.PROD? 'production' : env.DEV? 'development' : 'qa' 
-}
+const getEnvType = (env) => {
+  return env.PROD ? "production" : env.DEV ? "development" : "qa";
+};
 
-module.exports = env => ({
+module.exports = (env) => ({
   entry: {
-    app: ['./src/index.js']
+    app: ["./src/index.js"],
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -35,13 +33,16 @@ module.exports = env => ({
   devServer: {
     port: 3000,
     open: false,
+    host: "0.0.0.0",
+    historyApiFallback: true,
   },
-  devtool: 'source-map',
+  devtool: "source-map",
   resolve: {
     extensions: [".js", ".jsx"],
     alias: {
-      '@': path.resolve(__dirname, 'src'),
-    }
+      "@": path.resolve(__dirname, "src"),
+      "img": path.resolve(__dirname, "src/assets/img"),
+    },
   },
   module: {
     rules: [
@@ -61,16 +62,8 @@ module.exports = env => ({
         ],
       },
       {
-        test: /\.s[ac]ss$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          "sass-loader"
-        ],
-      },
-      {
         test: /\.svg$/,
-        use: ["svg-url-loader"],
+        use: ["@svgr/webpack"],
       },
     ],
   },
@@ -79,8 +72,5 @@ module.exports = env => ({
       template: "./public/index.ejs",
     }),
     new webpack.DefinePlugin(getEnvKeys(env)),
-    new MiniCssExtractPlugin({
-      filename: '[name].css'
-    }),
   ],
 });
