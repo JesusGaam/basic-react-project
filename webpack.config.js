@@ -2,6 +2,9 @@ const path = require("path");
 const dotenv = require("dotenv");
 const webpack = require("webpack");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const pagesCore = require(path.join(__dirname, "/src/pages-core.js"));
+
+pagesCore.buildJSONPages();
 
 const getEnvKeys = (env) => {
   const mode = env.WEBPACK_BUILD ? "production" : "development"; //{ WEBPACK_BUILD: true, WEBPACK_SERVE: true}
@@ -23,12 +26,10 @@ const getEnvType = (env) => {
 };
 
 module.exports = (env) => ({
-  entry: {
-    app: ["./src/index.js"],
-  },
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].bundle.js",
+    clean: true,
   },
   devServer: {
     port: 3000,
@@ -36,12 +37,13 @@ module.exports = (env) => ({
     host: "0.0.0.0",
     historyApiFallback: true,
   },
+  entry: pagesCore.getJSONEntry(),
   devtool: "source-map",
   resolve: {
     extensions: [".js", ".jsx"],
     alias: {
       "@": path.resolve(__dirname, "src"),
-      "img": path.resolve(__dirname, "src/assets/img"),
+      img: path.resolve(__dirname, "src/assets/img"),
     },
   },
   module: {
@@ -67,10 +69,7 @@ module.exports = (env) => ({
       },
     ],
   },
-  plugins: [
-    new HtmlWebPackPlugin({
-      template: "./public/index.ejs",
-    }),
-    new webpack.DefinePlugin(getEnvKeys(env)),
-  ],
+  plugins: [new webpack.DefinePlugin(getEnvKeys(env))].concat(
+    pagesCore.getJSONPages().map((page) => new HtmlWebPackPlugin({ ...page }))
+  ),
 });

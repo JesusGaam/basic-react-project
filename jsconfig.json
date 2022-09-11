@@ -6,7 +6,6 @@
     "paths": {
       "@/*": ["src/*"],
       "img": ["src/assets/img/*"]
-      
     }
   },
   "exclude": ["node_modules", "dist"]
