@@ -14,7 +14,7 @@ const User = () => {
   return (
     <>
     <Navigation/>
-      <a href="/app" style={{marginTop:"100px"}}>Go to home</a>
+      <a href="/" style={{marginTop:"100px"}}>Go to home</a>
       <form
         onSubmit={(e) => {
           e.preventDefault();

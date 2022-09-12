@@ -16,6 +16,7 @@ const getEnvKeys = (env) => {
 
   envKeys["process.env.MODE"] = JSON.stringify(getEnvType(env));
   envKeys["process.env.NODE_ENV"] = JSON.stringify(mode);
+  
   console.log("VARIABLES DE ENTORNO", envKeys);
 
   return envKeys;

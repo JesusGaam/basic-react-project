@@ -4,16 +4,15 @@ const path = require("path");
 const webpackPages = [];
 const pagesDistPath = "./pages-dist/";
 const mainTemplatePath = "./src/app.js";
-const pages = require(path.join(__dirname, "/components/pages/Pages"));
+const pages = require(path.join(__dirname, "/components/pages/"));
 
 const createJsonPage = (arrayPages, metadata) => {
   arrayPages.forEach((o) => {
     const name = o.filename.replace(/\//g, "-").replace(".html", "");
-    const entry = pagesDistPath + name + ".js";
 
     let page = {
       name,
-      entry: entry,
+      entry: pagesDistPath + name + ".js",
       template: "./public/index.ejs",
       chunks: [name],
       filename: o.filename,
@@ -30,12 +29,11 @@ const createJsonPage = (arrayPages, metadata) => {
     }
 
     if (o.canonical) {
-      page["canonical"] = process.env.DOMAIN + o.canonical;
+      page["canonical"] = o.canonical;
     } else if (metadata.canonical) {
-      page["canonical"] = process.env.DOMAIN + metadata.canonical;
+      page["canonical"] = metadata.canonical;
     } else {
-      page["canonical"] =
-        process.env.DOMAIN + "/" + o.filename.replace(".html", "");
+      page["canonical"] = o.filename.replace(".html", "");
     }
 
     if (o.image) {
