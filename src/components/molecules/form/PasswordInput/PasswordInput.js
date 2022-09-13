@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { getRandomNumber, isEmail } from '../../../../utils/Utilities'
-import Label from "../Label";
-import HelperText from "../HelperText";
+import Label from "../label/Label";
+import HelperText from "../helperText/HelperText";
 import './style.scss'
 
 const PasswordInput = ({ options }) => {
@@ -41,7 +41,7 @@ const PasswordInput = ({ options }) => {
           type="password"
           defaultValue={defaultValue}
           placeholder={placeholder}
-          onInput={(e) => emit(e.target.value)}
+          // onInput={(e) => emit(e.target.value)}
           onInput={(e) => emit(e.target.value, validationEvent(e.target.value, required))}
           autoComplete="off"
         />

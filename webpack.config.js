@@ -35,12 +35,15 @@ module.exports = env => ({
   devServer: {
     port: 3000,
     open: false,
+    host: "0.0.0.0",
+    historyApiFallback: true,
   },
   devtool: 'source-map',
   resolve: {
     extensions: [".js", ".jsx"],
     alias: {
       '@': path.resolve(__dirname, 'src'),
+      "img": path.resolve(__dirname, "src/assets/img"),
     }
   },
   module: {
@@ -70,7 +73,7 @@ module.exports = env => ({
       },
       {
         test: /\.svg$/,
-        use: ["svg-url-loader"],
+        use: ["@svgr/webpack"],
       },
     ],
   },
