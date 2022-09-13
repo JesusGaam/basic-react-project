@@ -1,5 +1,6 @@
-node_modules
 dist
+node_modules
+pages-dist
 package-lock.json
 .DS_Store
 yarn.lock

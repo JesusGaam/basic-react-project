@@ -15,7 +15,7 @@ const User = () => {
   return (
     <>
     <Navigation/>
-      <NavLink to="/app" style={{marginTop:"100px"}}>Go to App</NavLink>
+      <NavLink to="/" style={{marginTop:"100px"}}>Go to home</NavLink>
       <form
         onSubmit={(e) => {
           e.preventDefault();
