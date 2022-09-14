@@ -1,5 +1,5 @@
 import React from "react";
-import NameContext from '../../../contexts/NameContext'
+import NameContext from '@/contexts/NameContext'
 
 const NameForm = () => {
   const store = React.useContext(NameContext);

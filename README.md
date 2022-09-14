@@ -388,19 +388,7 @@ module.exports = env => ({
 ```
 
 
-## 13 Instalación de Mobx
-### 13.1 Se intalan la despendencias de MOBX para React
-```
-npm i mobx mobx-react
-```
-
-### 13.2 Se deshabilita el modo devtool
-Agregar la propiedad devtool con valor 'source-map' en ***webpack.config.js*** para ocultar los errores .map en el browser
-```
-devtool: 'source-map',
-```
-
-## 14 Comandos para ejecutar la aplicación
+## 13 Comandos para ejecutar la aplicación
 * Develop 
   ```
   npm start
