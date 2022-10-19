@@ -1,0 +1,36 @@
+@import "../../../styles/abstracts/all.scss";
+
+.youtube-player {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  img {
+    object-fit: cover;
+  }
+
+  img,
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  svg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+
+    width: 20%;
+    z-index: 1;
+    color: #fff;
+    opacity: 0.6;
+  }
+}

@@ -1,0 +1,91 @@
+@import "../../../../styles/abstracts/all.scss";
+
+.checkbox-input {
+  .checkbox {
+    display: grid;
+    grid-template-columns: 22px auto;
+    grid-gap: 8px;
+    cursor: pointer;
+
+    + .checkbox {
+      margin-top: 8px;
+    }
+
+    > div:nth-child(1) {
+      position: relative;
+    }
+    .wave {
+      position: absolute;
+      background-color: var(--color-primary-lighten);
+      @include border-radius(50px);
+    }
+    .box {
+      position: relative;
+      overflow: hidden;
+      width: 20px;
+      height: 20px;
+      border: solid 1px var(--color-border-input);
+
+      @include border-radius(4px);
+
+      .background {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0px;
+        height: 0px;
+        background-color: var(--color-primary);
+        @include border-radius(50px);
+        @include transition(400ms);
+      }
+      .check {
+        position: absolute;
+        width: 16px;
+        left: 2px;
+        top: 2px;
+        color: #ffffff;
+        opacity: 0;
+
+        @include transition(400ms);
+      }
+    }
+    &.selected {
+      .wave {
+        @include animate(keyframes-waves 400ms ease);
+      }
+      .box {
+        border-color: var(--color-primary);
+
+        .background {
+          top: -4px;
+          left: -4px;
+          width: 28px;
+          height: 28px;
+        }
+        .check {
+          opacity: 0.85;
+        }
+      }
+    }
+  }
+}
+
+@include keyframes(keyframes-waves) {
+  0% {
+    top: 50%;
+    left: 50%;
+    width: 0px;
+    height: 0px;
+    opacity: 0.7;
+  }
+  80% {
+    top: -7px;
+    left: -7px;
+    width: 36px;
+    height: 36px;
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+  }
+}

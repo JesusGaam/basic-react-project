@@ -1,0 +1,124 @@
+@import "../../../styles/abstracts/all.scss";
+
+.navbar-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $headerHeight;
+  background-color: #303030;
+  z-index: 1000;
+
+  padding: 0px 20px;
+
+  > div {
+    height: 100%;
+    max-width: $breakPointXL;
+    margin-left: auto;
+    margin-right: auto;
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+
+  .grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: fit-content(50px) auto 0;
+
+    @include media-md-less {
+      grid-template-columns: fit-content(50px) auto 40px;
+    }
+
+    .logo-container {
+      text-align: center;
+
+      @include media-md-less {
+        text-align: right;
+      }
+
+      svg {
+        height: $headerHeight - 20px;
+      }
+    }
+
+    .link-container {
+      text-align: right;
+
+      > div {
+        height: 24px;
+      }
+
+      a {
+        font-family: $fontFamilyNamePrimary;
+        color: #fff;
+        font-size: 18px;
+
+        + a {
+          margin-left: 30px;
+        }
+      }
+    }
+    .menu-container {
+      svg {
+        fill: #fff;
+        width: 40px;
+      }
+    }
+  }
+}
+
+.mobile-menu {
+  position: fixed;
+  top: $headerHeight;
+  height: 0;
+  text-align: left;
+  background-color: #303030;
+  overflow: hidden;
+  z-index: 999;
+
+  @include widthFill();
+  @include transition(all 300ms);
+
+  @include media-lg-greater {
+    display: none;
+  }
+
+  &.open {
+    height: 100%;
+  }
+  &.close {
+    height: 0;
+  }
+
+  .row {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  a,
+  a:visited {
+    display: block;
+
+    margin-left: 20px;
+    margin-right: 20px;
+
+    font-family: Monteral;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 60px;
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: none;
+
+    &:active {
+      color: #cccccc;
+      font-weight: bold;
+    }
+  }
+}
