@@ -1,6 +1,8 @@
 const path = require("path");
 const dotenv = require("dotenv");
 const webpack = require("webpack");
+const CopyPlugin = require("copy-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 const getEnvKeys = (env) => {
@@ -29,6 +31,7 @@ module.exports = (env) => ({
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].bundle.js",
+    clean: true,
   },
   devServer: {
     port: 3000,
@@ -36,12 +39,14 @@ module.exports = (env) => ({
     host: "0.0.0.0",
     historyApiFallback: true,
   },
-  devtool: "source-map",
+  devtool: false,
   resolve: {
     extensions: [".js", ".jsx"],
     alias: {
       "@": path.resolve(__dirname, "src"),
-      "img": path.resolve(__dirname, "src/assets/img"),
+      img: path.resolve(__dirname, "src/assets/img"),
+      fonts: path.resolve(__dirname, "src/assets/fonts"),
+      pages: path.resolve(__dirname, "src/components/pages/"),
     },
   },
   module: {
@@ -65,12 +70,51 @@ module.exports = (env) => ({
         test: /\.svg$/,
         use: ["@svgr/webpack"],
       },
+      {
+        loader: "file-loader",
+        test: /\.(png|jpe?g|gif)$/i,
+        options: {
+          outputPath: "resources/img",
+        },
+      },
+      {
+        loader: "file-loader",
+        test: /\.(pdf)$/i,
+        options: {
+          outputPath: "resources/docs",
+        },
+      },
+      {
+        loader: "file-loader",
+        test: /\.(ttf|eot|otf|woff|woff2)$/i,
+        options: {
+          outputPath: "resources/fonts",
+        },
+      },
     ],
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin({
+      terserOptions: {
+        format: {
+          comments: false,
+        },
+      },
+      extractComments: false,
+    })],
   },
   plugins: [
     new HtmlWebPackPlugin({
       template: "./public/index.ejs",
     }),
     new webpack.DefinePlugin(getEnvKeys(env)),
+    new CopyPlugin({
+      patterns: [
+        { from: "public/manifest.json" },
+        { from: "public/browserconfig.xml" },
+        { from: "src/assets/favicon", to: "resources/favicon" },
+      ],
+    }),
   ],
 });
