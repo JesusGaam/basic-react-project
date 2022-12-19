@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import './style.scss'
+import "./style.scss";
 
-import ButtonInput from "../../molecules/form/ButtonInput";
-import TextInput from "../../molecules/form/TextInput";
-import EmailInput from "../../molecules/form/EmailInput";
-import PasswordInput from "../../molecules/form/PasswordInput";
+import ButtonInput from "@/components/molecules/form/buttonInput/ButtonInput";
+import TextInput from "@/components/molecules/form/textInput/TextInput";
+import EmailInput from "@/components/molecules/form/emailInput/EmailInput";
+import PasswordInput from "@/components/molecules/form/passwordInput/PasswordInput";
+import Text from "@/components/molecules/text/Text";
 
 const Home = () => {
   const [inputOptions, setInputOptions] = useState({
@@ -33,9 +34,11 @@ const Home = () => {
       ...inputOptions,
       value,
       error: statusError.error,
-      helper: statusError.error ? statusError.message : inputOptions.defaultHelper
+      helper: statusError.error
+        ? statusError.message
+        : inputOptions.defaultHelper,
     });
-  }
+  };
 
   const emitEmail = (value, statusError) => {
     console.log(value);
@@ -43,13 +46,15 @@ const Home = () => {
       ...emailOptions,
       value,
       error: statusError.error,
-      helper: statusError.error ? statusError.message : emailOptions.defaultHelper
+      helper: statusError.error
+        ? statusError.message
+        : emailOptions.defaultHelper,
     });
-  }
+  };
 
   const emitButton = (event) => {
     console.log("Button clicked");
-  }
+  };
 
   return (
     <section className="container">
@@ -62,14 +67,28 @@ const Home = () => {
 
         <h1 className="spacing">Example body text</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        <p>Voluptatibus qui architecto saepe ipsam eius libero sed doloribus hic repellat asperiores numquam quod magni expedita, laudantium dicta ipsum omnis temporibus aliquid?</p>
+        <p>
+          Voluptatibus qui architecto saepe ipsam eius libero sed doloribus hic
+          repellat asperiores numquam quod magni expedita, laudantium dicta
+          ipsum omnis temporibus aliquid?
+        </p>
 
         <h2 className="spacing">Example body text</h2>
-        <p className="text-success">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        <p className="text-info">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        <p className="text-warning">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        <p className="text-danger">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        <p className="text-disabled">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        <p className="text-success">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </p>
+        <p className="text-info">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </p>
+        <p className="text-warning">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </p>
+        <p className="text-danger">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </p>
+        <p className="text-disabled">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </p>
 
         <h2>Buttons</h2>
         <div>
@@ -78,35 +97,31 @@ const Home = () => {
             options={{
               mode: "primary",
               defaultValue: "Primary",
-              emit: (e) => emitButton(e)
+              emit: (e) => emitButton(e),
             }}
           />
           <ButtonInput
             options={{
               mode: "secundary",
               defaultValue: "Secundary",
-              emit: (e) => emitButton(e)
+              emit: (e) => emitButton(e),
             }}
           />
         </div>
 
         <h2 className="spacing">Forms</h2>
-        <TextInput
-          options={inputOptions}
-        />
-        <EmailInput
-          options={emailOptions}
-        />
+        <TextInput options={inputOptions} />
+        <EmailInput options={emailOptions} />
         <PasswordInput
           options={{
             label: "Password Input",
             defaultHelper: "Enter your password",
           }}
         />
+        <Text />
       </div>
     </section>
-  )
-}
-
+  );
+};
 
 export default Home;

@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import { getRandomNumber } from '../../../../utils/Utilities'
-import Label from "../Label";
-import HelperText from "../HelperText";
-import './style.scss'
+import { getRandomNumber, isEmail } from '../../../../utils/Utilities'
+import Label from "../label/Label";
+import HelperText from "../helperText/HelperText";
 
-const TextInput = ({ options }) => {
+const EmailInput = ({ options }) => {
   const {
     id = getRandomNumber(10000, 1000000),
     error = false,
@@ -26,7 +25,7 @@ const TextInput = ({ options }) => {
 
   return (
     <div
-      className={`form-element text ${disabled ? 'disabled' : ''}`}
+      className={`form-element email ${disabled ? 'disabled' : ''}`}
     >
       <Label
         options={{
@@ -56,12 +55,19 @@ const TextInput = ({ options }) => {
 }
 
 const validationEvent = (value, required) => {
-  var error = required && value.length == 0;
+  let error = true;
+  let message = "";
 
-  return {
-    error,
-    message: error ? "Este campo es obligatorio" : ""
+
+  if (required && value.length == 0) {
+    message = "Este campo es obligatorio";
+  } else
+  if (!isEmail(value)) {
+    message = "El correo electrónico es incorrecto";
+  } else {
+    error = false;
   }
+  return { error, message }
 }
 
-export default TextInput;
+export default EmailInput;

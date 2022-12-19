@@ -251,7 +251,7 @@ import './styles/main.scss'
 ## 9 Configuración de Loader para imagenes SVG
 ### 9.1 Se intalan las despendencias de NPM 
 ```
-npm i -D svg-url-loader
+npm i -D @svgr/webpack
 ```
 
 ### 8.2 Se agrega el loader en web ***webpack.config.js*** dentro del array en ***module.rules***
@@ -259,7 +259,7 @@ npm i -D svg-url-loader
 module.rules = [
   {
     test: /\.svg$/,
-    use: ["svg-url-loader"],
+    use: ["@svgr/webpack"],
   }
 ];
 ```
