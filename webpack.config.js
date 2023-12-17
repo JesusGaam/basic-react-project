@@ -26,7 +26,7 @@ const getEnvType = (env) => {
 
 module.exports = (env) => ({
   entry: {
-    app: ["./src/index.js"],
+    app: ["./src/index.tsx"],
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -41,18 +41,29 @@ module.exports = (env) => ({
   },
   devtool: false,
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: ['.js', '.jsx', '.tsx', '.ts'],
     alias: {
-      "@": path.resolve(__dirname, "src"),
-      img: path.resolve(__dirname, "src/assets/img"),
-      fonts: path.resolve(__dirname, "src/assets/fonts"),
+      "@": path.resolve(__dirname, "src/"),
+      img: path.resolve(__dirname, "src/assets/img/"),
+      svg: path.resolve(__dirname, "src/assets/img/svg/"),
+      fonts: path.resolve(__dirname, "src/assets/fonts/"),
+      atoms: path.resolve(__dirname, "src/components/atoms/"),
+      molecules: path.resolve(__dirname, "src/components/molecules/"),
+      organisms: path.resolve(__dirname, "src/components/organisms/"),
       pages: path.resolve(__dirname, "src/components/pages/"),
+      constants: path.resolve(__dirname, "src/constants/"),
+      context: path.resolve(__dirname, "src/context/"),
+      hooks: path.resolve(__dirname, "src/hooks/"),
+      interfaces: path.resolve(__dirname, "src/interfaces/"),
+      services: path.resolve(__dirname, "src/services/"),
+      theme: path.resolve(__dirname, "src/theme/"),
+      utils: path.resolve(__dirname, "src/utils/"),
     },
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|tsx|ts)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
