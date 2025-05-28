@@ -1,7 +1,10 @@
 import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import GlobalStyles from "./GlobalStyles";
-import { TITLE_FONT_FAMILY, BODY_FONT_FAMILY } from "@/constants";
+
+import '@fontsource/montserrat/400.css';
+import '@fontsource/montserrat/600.css'
+
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -49,7 +52,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: TITLE_FONT_FAMILY,
+    fontFamily: 'Montserrat, sans-serif',
     allVariants: {
       color: "#616161",
     },
@@ -57,6 +60,7 @@ const theme = createTheme({
       color: "#293D51",
       fontSize: "42px",
       fontWeight: 600,
+      fontFamily: 'Montserrat, sans-serif',
 
       "@media (max-width:833px)": {
         fontSize: "38px"
@@ -66,6 +70,7 @@ const theme = createTheme({
       color: "#293D51",
       fontWeight: 600,
       fontSize: "32px",
+      fontFamily: 'Montserrat, sans-serif',
 
       "@media (max-width:833px)": {
         fontSize: "28px"
@@ -75,6 +80,7 @@ const theme = createTheme({
       color: "#293D51",
       fontWeight: 600,
       fontSize: "28px",
+      fontFamily: 'Montserrat, sans-serif',
 
       "@media (max-width:833px)": {
         fontSize: "24px"
@@ -82,18 +88,23 @@ const theme = createTheme({
     },
     h4: {
       fontSize: "2.4rem",
+      fontFamily: 'Montserrat, sans-serif',
     },
     h5: {
       fontSize: "2.1rem",
+      fontFamily: 'Montserrat, sans-serif',
     },
     h6: {
       fontSize: "1.8rem",
+      fontFamily: 'Montserrat, sans-serif',
     },
     body1: {
       fontSize: "18px",
+      fontFamily: 'Montserrat, sans-serif',
     },
     body2: {
       fontSize: "16px",
+      fontFamily: 'Montserrat, sans-serif',
     },
   },
   breakpoints: {
@@ -103,6 +114,61 @@ const theme = createTheme({
       md: 834,
       lg: 1200,
       xl: 1440,
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          fontWeight: 600,
+          fontSize: "16px",
+          borderRadius: 40,
+          textTransform: "none",
+          fontFamily: 'Montserrat, sans-serif',
+        },
+      },
+    },
+
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              borderColor: '#FF6C03',
+              borderRadius: "12px"
+            },
+            '&:hover fieldset': {
+              borderColor: '#1B1F6B', // Cambiar el color del borde al pasar el mouse
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#1B1F6B', // Cambiar el color del borde cuando el campo está enfocado
+            },
+          },
+        },
+      },
+    },
+
+    MuiFormControlLabel: {
+      styleOverrides: {
+        root: {
+          "&.MuiFormLabel-root": {
+            color: "#545454"
+          },
+          ".MuiFormControlLabel-label": {
+            "color": "#545454"
+          },
+
+          '& .MuiCheckbox-root': {
+            color: "#4C61BF33",
+            '&.Mui-checked': {
+              color: "#FF6C03",
+            },
+            '.MuiSvgIcon-root': {
+              fontSize: 26
+            },
+          },
+        },
+      },
     },
   },
   custom: {

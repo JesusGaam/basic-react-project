@@ -46,7 +46,6 @@ module.exports = (env) => ({
       "@": path.resolve(__dirname, "src/"),
       img: path.resolve(__dirname, "src/assets/img/"),
       svg: path.resolve(__dirname, "src/assets/img/svg/"),
-      fonts: path.resolve(__dirname, "src/assets/fonts/"),
       atoms: path.resolve(__dirname, "src/components/atoms/"),
       molecules: path.resolve(__dirname, "src/components/molecules/"),
       organisms: path.resolve(__dirname, "src/components/organisms/"),
@@ -94,14 +93,7 @@ module.exports = (env) => ({
         options: {
           outputPath: "resources/docs",
         },
-      },
-      {
-        loader: "file-loader",
-        test: /\.(ttf|eot|otf|woff|woff2)$/i,
-        options: {
-          outputPath: "resources/fonts",
-        },
-      },
+      }
     ],
   },
   optimization: {
