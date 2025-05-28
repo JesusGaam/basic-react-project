@@ -93,7 +93,11 @@ module.exports = (env) => ({
         options: {
           outputPath: "resources/docs",
         },
-      }
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   optimization: {

@@ -1,6 +1,5 @@
 import React from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import GlobalStyles from "./GlobalStyles";
+import { Theme, createTheme, ThemeProvider, CssBaseline } from "@mui/material";
 
 import '@fontsource/montserrat/400.css';
 import '@fontsource/montserrat/600.css'
@@ -33,7 +32,20 @@ const shadows = [
   "0 0 30px -5px rgb(0, 0, 0, 0.18)",
 ];
 
+const breakpointTheme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 440,
+      md: 834,
+      lg: 1200,
+      xl: 1440,
+    },
+  },
+});
+
 const theme = createTheme({
+  ...breakpointTheme,
   palette: {
     mode: "light",
     text: {
@@ -62,7 +74,7 @@ const theme = createTheme({
       fontWeight: 600,
       fontFamily: 'Montserrat, sans-serif',
 
-      "@media (max-width:833px)": {
+      [breakpointTheme.breakpoints.down('md')]: {
         fontSize: "38px"
       },
     },
@@ -72,7 +84,7 @@ const theme = createTheme({
       fontSize: "32px",
       fontFamily: 'Montserrat, sans-serif',
 
-      "@media (max-width:833px)": {
+      [breakpointTheme.breakpoints.down('md')]: {
         fontSize: "28px"
       },
     },
@@ -82,7 +94,7 @@ const theme = createTheme({
       fontSize: "28px",
       fontFamily: 'Montserrat, sans-serif',
 
-      "@media (max-width:833px)": {
+      [breakpointTheme.breakpoints.down('md')]: {
         fontSize: "24px"
       },
     },
@@ -107,16 +119,23 @@ const theme = createTheme({
       fontFamily: 'Montserrat, sans-serif',
     },
   },
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 440,
-      md: 834,
-      lg: 1200,
-      xl: 1440,
-    },
-  },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: (theme: Theme) => ({
+        html: {
+          scrollBehavior: "smooth",
+        },
+        body: {
+          fontFamily: 'Montserrat, sans-serif',
+          paddingTop: theme.custom.appBarHeight,
+          margin: 0,
+
+          [theme.breakpoints.down("sm")]: {
+            paddingBottom: theme.custom.bottomNavigationHeight,
+          },
+        },
+      }),
+    },
     MuiButton: {
       styleOverrides: {
         root: {
@@ -184,17 +203,15 @@ const theme = createTheme({
   },
 });
 
-const Theme = ({ children }: { children: any }) => {
+export default function ({ children }: { children: any }) {
   for (const i in shadows) {
     theme.shadows[i] = shadows[i];
   }
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyles />
+      <CssBaseline />
       {children}
     </ThemeProvider>
   );
 };
-
-export default Theme;
